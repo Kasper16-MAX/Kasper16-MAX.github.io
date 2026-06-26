@@ -1,38 +1,63 @@
-let piggy = {
-    name: "",
-    goal: 0,
-    current: 0
-};
+let piggies = JSON.parse(localStorage.getItem("piggies")) || [];
+
+function save() {
+    localStorage.setItem("piggies", JSON.stringify(piggies));
+}
 
 function createPiggy() {
-    piggy.name = document.getElementById("name").value;
-    piggy.goal = Number(document.getElementById("goal").value);
-    piggy.current = 0;
+    let name = document.getElementById("name").value;
+    let goal = Number(document.getElementById("goal").value);
 
-    document.getElementById("createPage").style.display = "none";
-    document.getElementById("mainPage").style.display = "block";
+    if (!name || !goal) return;
 
-    document.getElementById("piggyName").innerText = piggy.name;
+    piggies.push({
+        id: Date.now(),
+        name: name,
+        goal: goal,
+        current: 0
+    });
 
-    updateUI();
+    save();
+    render();
+
+    document.getElementById("name").value = "";
+    document.getElementById("goal").value = "";
 }
 
-function addMoney() {
-    let money = Number(document.getElementById("money").value);
-    piggy.current += money;
+function addMoney(id) {
+    let amount = Number(prompt("Сколько добавить?"));
 
-    document.getElementById("money").value = "";
+    let piggy = piggies.find(p => p.id === id);
 
-    updateUI();
+    if (!piggy || !amount) return;
+
+    piggy.current += amount;
+
+    save();
+    render();
 }
 
-function updateUI() {
-    let percent = (piggy.current / piggy.goal) * 100;
+function render() {
+    let list = document.getElementById("list");
+    list.innerHTML = "";
 
-    if (percent > 100) percent = 100;
+    piggies.forEach(p => {
+        let percent = (p.current / p.goal) * 100;
+        if (percent > 100) percent = 100;
 
-    document.getElementById("progressText").innerText =
-        `${piggy.current} ₽ / ${piggy.goal} ₽`;
+        list.innerHTML += `
+            <div class="piggy">
+                <h3>${p.name}</h3>
+                <p>${p.current} ₽ / ${p.goal} ₽</p>
 
-    document.getElementById("progressBar").style.width = percent + "%";
+                <div class="bar">
+                    <div class="fill" style="width:${percent}%"></div>
+                </div>
+
+                <button onclick="addMoney(${p.id})">Добавить деньги</button>
+            </div>
+        `;
+    });
 }
+
+render();
