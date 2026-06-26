@@ -9,29 +9,22 @@
 
 <div class="container">
 
-    <!-- ЭКРАН СОЗДАНИЯ -->
-    <div id="createPage">
-        <h1>Создать копилку</h1>
+    <h1>💰 Копилка</h1>
 
-        <input id="name" type="text" placeholder="Название копилки">
-        <input id="goal" type="number" placeholder="Сумма цели">
+    <!-- СОЗДАНИЕ -->
+    <div class="block">
+        <h3>Создать копилку</h3>
 
-        <button onclick="createPiggy()">Создать копилку</button>
+        <input id="name" placeholder="Название">
+        <input id="goal" type="number" placeholder="Цель">
+
+        <button onclick="createPiggy()">Создать</button>
     </div>
 
-    <!-- ГЛАВНАЯ СТРАНИЦА -->
-    <div id="mainPage" style="display:none;">
-        <h1 id="piggyName"></h1>
+    <hr>
 
-        <p id="progressText"></p>
-
-        <div class="bar">
-            <div id="progressBar"></div>
-        </div>
-
-        <input id="money" type="number" placeholder="Добавить сумму">
-        <button onclick="addMoney()">Добавить деньги</button>
-    </div>
+    <!-- СПИСОК КОПИЛОК -->
+    <div id="list"></div>
 
 </div>
 
