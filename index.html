@@ -1,22 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Мой сайт</title>
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
-            margin-top: 100px;
-            background: #f0f8ff;
-        }
-
-        h1 {
-            color: #0066cc;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Копилка</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Привет!</h1>
-    <p>Это мой первый сайт на GitHub Pages.</p>
+
+<div class="container">
+
+    <!-- ЭКРАН СОЗДАНИЯ -->
+    <div id="createPage">
+        <h1>Создать копилку</h1>
+
+        <input id="name" type="text" placeholder="Название копилки">
+        <input id="goal" type="number" placeholder="Сумма цели">
+
+        <button onclick="createPiggy()">Создать копилку</button>
+    </div>
+
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <div id="mainPage" style="display:none;">
+        <h1 id="piggyName"></h1>
+
+        <p id="progressText"></p>
+
+        <div class="bar">
+            <div id="progressBar"></div>
+        </div>
+
+        <input id="money" type="number" placeholder="Добавить сумму">
+        <button onclick="addMoney()">Добавить деньги</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
