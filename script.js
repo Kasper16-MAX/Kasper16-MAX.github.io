@@ -46,17 +46,28 @@ function renderMenu() {
     piggies.forEach(piggy => {
 
         list.innerHTML += `
-            <button
-                class="piggy-button"
-                onclick="openPiggy(${piggy.id})">
+            <div class="piggy-item">
 
-                ${piggy.name}
+                <button
+                    class="piggy-button"
+                    onclick="openPiggy(${piggy.id})">
 
-            </button>
+                    ${piggy.name}
+
+                </button>
+
+                <button
+                    class="delete-button"
+                    onclick="deletePiggy(${piggy.id})">
+
+                    🗑️
+
+                </button>
+
+            </div>
         `;
     });
 }
-
 function openPiggy(id) {
 
     currentPiggy =
@@ -77,6 +88,35 @@ function addMoney() {
     save();
 
     renderPiggy();
+}
+
+function deletePiggy(id) {
+
+    const answer = confirm(
+        "Удалить эту копилку?"
+    );
+
+    if (!answer) return;
+
+    piggies = piggies.filter(
+        piggy => piggy.id !== id
+    );
+
+    if (
+        currentPiggy &&
+        currentPiggy.id === id
+    ) {
+
+        currentPiggy = null;
+
+        document.getElementById(
+            "piggyInfo"
+        ).innerHTML =
+            "<h1>Выберите копилку</h1>";
+    }
+
+    save();
+    renderMenu();
 }
 
 function renderPiggy() {
