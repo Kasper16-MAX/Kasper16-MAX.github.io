@@ -1,63 +1,119 @@
-let piggies = JSON.parse(localStorage.getItem("piggies")) || [];
+let piggies =
+    JSON.parse(localStorage.getItem("piggies")) || [];
+
+let currentPiggy = null;
 
 function save() {
-    localStorage.setItem("piggies", JSON.stringify(piggies));
+    localStorage.setItem(
+        "piggies",
+        JSON.stringify(piggies)
+    );
 }
 
 function createPiggy() {
-    let name = document.getElementById("name").value;
-    let goal = Number(document.getElementById("goal").value);
 
-    if (!name || !goal) return;
+    const name =
+        document.getElementById("name").value;
 
-    piggies.push({
+    const goal =
+        Number(document.getElementById("goal").value);
+
+    if (!name || goal <= 0) return;
+
+    const piggy = {
         id: Date.now(),
-        name: name,
-        goal: goal,
+        name,
+        goal,
         current: 0
-    });
+    };
+
+    piggies.push(piggy);
 
     save();
-    render();
+    renderMenu();
 
     document.getElementById("name").value = "";
     document.getElementById("goal").value = "";
 }
 
-function addMoney(id) {
-    let amount = Number(prompt("Сколько добавить?"));
+function renderMenu() {
 
-    let piggy = piggies.find(p => p.id === id);
+    const list =
+        document.getElementById("piggyList");
 
-    if (!piggy || !amount) return;
-
-    piggy.current += amount;
-
-    save();
-    render();
-}
-
-function render() {
-    let list = document.getElementById("list");
     list.innerHTML = "";
 
-    piggies.forEach(p => {
-        let percent = (p.current / p.goal) * 100;
-        if (percent > 100) percent = 100;
+    piggies.forEach(piggy => {
 
         list.innerHTML += `
-            <div class="piggy">
-                <h3>${p.name}</h3>
-                <p>${p.current} ₽ / ${p.goal} ₽</p>
+            <button
+                class="piggy-button"
+                onclick="openPiggy(${piggy.id})">
 
-                <div class="bar">
-                    <div class="fill" style="width:${percent}%"></div>
-                </div>
+                ${piggy.name}
 
-                <button onclick="addMoney(${p.id})">Добавить деньги</button>
-            </div>
+            </button>
         `;
     });
 }
 
-render();
+function openPiggy(id) {
+
+    currentPiggy =
+        piggies.find(p => p.id === id);
+
+    renderPiggy();
+}
+
+function addMoney() {
+
+    const money =
+        Number(prompt("Сколько добавить?"));
+
+    if (!money || money <= 0) return;
+
+    currentPiggy.current += money;
+
+    save();
+
+    renderPiggy();
+}
+
+function renderPiggy() {
+
+    if (!currentPiggy) return;
+
+    let percent =
+        currentPiggy.current /
+        currentPiggy.goal * 100;
+
+    if (percent > 100)
+        percent = 100;
+
+    document.getElementById(
+        "piggyInfo"
+    ).innerHTML = `
+
+        <h1>${currentPiggy.name}</h1>
+
+        <h3>
+            ${currentPiggy.current} ₽
+            /
+            ${currentPiggy.goal} ₽
+        </h3>
+
+        <div class="bar">
+            <div
+                class="fill"
+                style="width:${percent}%">
+            </div>
+        </div>
+
+        <button onclick="addMoney()">
+            Добавить деньги
+        </button>
+
+    `;
+}
+
+renderMenu();
