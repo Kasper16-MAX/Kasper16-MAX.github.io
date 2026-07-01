@@ -5,27 +5,37 @@
     <title>Копилка</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
-    <h1>💰 Копилка</h1>
+    <!-- ЛЕВОЕ МЕНЮ -->
+    <div class="sidebar">
 
-    <!-- СОЗДАНИЕ КОПИЛКИ -->
-    <div class="block">
-        <h3>Создать копилку</h3>
+        <h2>Мои копилки</h2>
 
-        <input id="name" type="text" placeholder="Название копилки">
-        <input id="goal" type="number" placeholder="Сумма цели">
+        <div id="piggyList"></div>
 
-        <button onclick="createPiggy()">Создать</button>
+        <hr>
+
+        <input id="name" type="text" placeholder="Название">
+
+        <input id="goal" type="number" placeholder="Цель">
+
+        <button onclick="createPiggy()">
+            Создать копилку
+        </button>
+
     </div>
 
-    <hr>
+    <!-- ОСНОВНАЯ ЧАСТЬ -->
+    <div class="main">
 
-    <!-- СПИСОК КОПИЛОК -->
-    <div id="list"></div>
+        <div id="piggyInfo">
+            <h1>Выберите копилку</h1>
+        </div>
+
+    </div>
 
 </div>
 
