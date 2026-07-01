@@ -90,6 +90,27 @@ function addMoney() {
     renderPiggy();
 }
 
+function removeMoney() {
+
+    const money = Number(
+        prompt("Сколько вычесть?")
+    );
+
+    if (!money || money <= 0) {
+        return;
+    }
+
+    currentPiggy.current -= money;
+
+    // Не даём уйти в минус
+    if (currentPiggy.current < 0) {
+        currentPiggy.current = 0;
+    }
+
+    save();
+    renderPiggy();
+}
+
 function deletePiggy(id) {
 
     const answer = confirm(
@@ -130,29 +151,36 @@ function renderPiggy() {
     if (percent > 100)
         percent = 100;
 
-    document.getElementById(
-        "piggyInfo"
-    ).innerHTML = `
+ocument.getElementById("piggyInfo").innerHTML = `
 
-        <h1>${currentPiggy.name}</h1>
+    <h1>${currentPiggy.name}</h1>
 
-        <h3>
-            ${currentPiggy.current} ₽
-            /
-            ${currentPiggy.goal} ₽
-        </h3>
+    <h3>
+        ${currentPiggy.current} ₽
+        /
+        ${currentPiggy.goal} ₽
+    </h3>
 
-        <div class="bar">
-            <div
-                class="fill"
-                style="width:${percent}%">
-            </div>
+    <div class="bar">
+        <div
+            class="fill"
+            style="width:${percent}%">
         </div>
+    </div>
 
+    <div class="money-buttons">
         <button onclick="addMoney()">
-            Добавить деньги
+            ➕ Добавить деньги
         </button>
 
+        <button
+            class="remove-money-button"
+            onclick="removeMoney()">
+            ➖ Вычесть деньги
+        </button>
+    </div>
+
+`;
     `;
 }
 
