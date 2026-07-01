@@ -55,3 +55,23 @@ button {
     height: 100%;
     background: green;
 }
+
+.piggy-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.piggy-button {
+    flex: 1;
+}
+
+.delete-button {
+    width: 50px;
+    background: red;
+    font-size: 18px;
+}
+
+.delete-button:hover {
+    background: darkred;
+}
