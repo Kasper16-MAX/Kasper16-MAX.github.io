@@ -151,7 +151,7 @@ function renderPiggy() {
     if (percent > 100)
         percent = 100;
 
-ocument.getElementById("piggyInfo").innerHTML = `
+document.getElementById("piggyInfo").innerHTML = `
 
     <h1>${currentPiggy.name}</h1>
 
@@ -181,7 +181,6 @@ ocument.getElementById("piggyInfo").innerHTML = `
     </div>
 
 `;
-    `;
 }
 
 renderMenu();
