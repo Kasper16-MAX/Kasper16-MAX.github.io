@@ -78,15 +78,27 @@ function openPiggy(id) {
 
 function addMoney() {
 
-    const money =
-        Number(prompt("Сколько добавить?"));
+    if (currentPiggy.current >= currentPiggy.goal) {
+        alert("🎉 Копилка уже заполнена!");
+        return;
+    }
 
-    if (!money || money <= 0) return;
+    const money = Number(
+        prompt("Сколько добавить?")
+    );
+
+    if (!money || money <= 0) {
+        return;
+    }
 
     currentPiggy.current += money;
 
-    save();
+    // Не даём превысить цель
+    if (currentPiggy.current > currentPiggy.goal) {
+        currentPiggy.current = currentPiggy.goal;
+    }
 
+    save();
     renderPiggy();
 }
 
@@ -148,39 +160,57 @@ function renderPiggy() {
         currentPiggy.current /
         currentPiggy.goal * 100;
 
-    if (percent > 100)
+    if (percent > 100) {
         percent = 100;
+    }
 
-document.getElementById("piggyInfo").innerHTML = `
+    const completed =
+        currentPiggy.current >= currentPiggy.goal;
 
-    <h1>${currentPiggy.name}</h1>
+    document.getElementById("piggyInfo").innerHTML = `
 
-    <h3>
-        ${currentPiggy.current} ₽
-        /
-        ${currentPiggy.goal} ₽
-    </h3>
+        <h1>${currentPiggy.name}</h1>
 
-    <div class="bar">
-        <div
-            class="fill"
-            style="width:${percent}%">
+        <h3>
+            ${currentPiggy.current} ₽
+            /
+            ${currentPiggy.goal} ₽
+        </h3>
+
+        <div class="bar">
+            <div
+                class="fill"
+                style="width:${percent}%">
+            </div>
         </div>
-    </div>
 
-    <div class="money-buttons">
-        <button onclick="addMoney()">
-            ➕ Добавить деньги
-        </button>
+        ${
+            completed
+            ? '<div class="success-message">🎉 Копилка заполнена!</div>'
+            : ''
+        }
 
-        <button
-            class="remove-money-button"
-            onclick="removeMoney()">
-            ➖ Вычесть деньги
-        </button>
-    </div>
+        <div class="money-buttons">
 
-`;
+            <button
+                onclick="addMoney()"
+                ${completed ? 'disabled' : ''}>
+
+                ➕ Добавить деньги
+
+            </button>
+
+            <button
+                class="remove-money-button"
+                onclick="removeMoney()">
+
+                ➖ Вычесть деньги
+
+            </button>
+
+        </div>
+
+    `;
 }
 
 renderMenu();
