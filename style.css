@@ -1,93 +1,183 @@
-body {
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f3f6ff;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    color: white;
 }
 
 .container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
 }
+
+/* Боковое меню */
 
 .sidebar {
-    width: 300px;
-    background: white;
-    padding: 20px;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    width: 320px;
+    padding: 30px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border-right: 1px solid rgba(255,255,255,0.2);
 }
 
-.main {
-    flex: 1;
-    padding: 40px;
+.sidebar h2 {
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-input,
-button {
+input {
     width: 100%;
-    padding: 10px;
+    padding: 14px;
     margin-top: 10px;
-    box-sizing: border-box;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: rgba(255,255,255,0.7);
 }
 
 button {
-    background: green;
-    color: white;
     border: none;
     cursor: pointer;
+    transition: 0.3s;
 }
 
-.piggy-button {
+.sidebar > button {
     width: 100%;
-    margin-bottom: 10px;
-    background: #4a90e2;
+    margin-top: 15px;
+    padding: 14px;
+    border-radius: 15px;
+    background: #4CAF50;
+    color: white;
+    font-size: 16px;
 }
 
-.bar {
-    width: 100%;
-    height: 30px;
-    background: #ddd;
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 20px 0;
+.sidebar > button:hover {
+    transform: scale(1.03);
+    background: #45a049;
 }
 
-.fill {
-    height: 100%;
-    background: green;
-}
+/* Список копилок */
 
 .piggy-item {
     display: flex;
     gap: 10px;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .piggy-button {
     flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 15px;
+}
+
+.piggy-button:hover {
+    background: rgba(255,255,255,0.3);
 }
 
 .delete-button {
     width: 50px;
-    background: red;
+    border-radius: 12px;
+    background: #ff4d4d;
+    color: white;
     font-size: 18px;
 }
 
 .delete-button:hover {
-    background: darkred;
-}.money-buttons {
+    background: #ff1a1a;
+    transform: scale(1.05);
+}
+
+/* Правая часть */
+
+.main {
+    flex: 1;
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+#piggyInfo {
+    width: 600px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+#piggyInfo h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+#piggyInfo h3 {
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+/* Прогресс-бар */
+
+.bar {
+    width: 100%;
+    height: 35px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 30px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff87, #60efff);
+    border-radius: 30px;
+    transition: 0.5s;
+}
+
+/* Кнопки денег */
+
+.money-buttons {
+    display: flex;
+    gap: 20px;
 }
 
 .money-buttons button {
     flex: 1;
+    padding: 15px;
+    border-radius: 15px;
+    color: white;
+    font-size: 16px;
+}
+
+.money-buttons button:first-child {
+    background: #4CAF50;
+}
+
+.money-buttons button:first-child:hover {
+    background: #45a049;
+    transform: translateY(-2px);
 }
 
 .remove-money-button {
-    background: #d32f2f;
+    background: #ff4d4d;
 }
 
 .remove-money-button:hover {
-    background: #b71c1c;
+    background: #ff1a1a;
+    transform: translateY(-2px);
 }
