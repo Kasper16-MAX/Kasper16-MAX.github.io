@@ -181,3 +181,20 @@ button {
     background: #ff1a1a;
     transform: translateY(-2px);
 }
+
+success-message {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 15px;
+    background: rgba(76, 175, 80, 0.3);
+    border: 2px solid #4CAF50;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+button:disabled {
+    background: gray !important;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
