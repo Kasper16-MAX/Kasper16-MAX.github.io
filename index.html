@@ -39,6 +39,39 @@
 
 </div>
 
+<!-- Модальное окно -->
+<div id="modal" class="modal">
+
+    <div class="modal-content">
+
+        <h2 id="modalTitle"></h2>
+
+        <input
+            type="text"
+            id="modalInput"
+            placeholder=""
+        >
+
+        <div class="modal-buttons">
+
+            <button onclick="confirmModal()">
+                ОК
+            </button>
+
+            <button
+                class="cancel-button"
+                onclick="closeModal()">
+
+                Отмена
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 <script src="script.js"></script>
 
 </body>
