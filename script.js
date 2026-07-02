@@ -2,7 +2,7 @@ let piggies =
     JSON.parse(localStorage.getItem("piggies")) || [];
 
 let currentPiggy = null;
-
+let modalAction = null;
 function save() {
     localStorage.setItem(
         "piggies",
@@ -36,6 +36,47 @@ function createPiggy() {
     document.getElementById("goal").value = "";
 }
 
+function openModal(title, placeholder, action) {
+
+    modalAction = action;
+
+    document.getElementById(
+        "modalTitle"
+    ).innerText = title;
+
+    document.getElementById(
+        "modalInput"
+    ).placeholder = placeholder;
+
+    document.getElementById(
+        "modalInput"
+    ).value = "";
+
+    document.getElementById(
+        "modal"
+    ).style.display = "flex";
+}
+
+function closeModal() {
+
+    document.getElementById(
+        "modal"
+    ).style.display = "none";
+}
+
+function confirmModal() {
+
+    const value =
+        document.getElementById(
+            "modalInput"
+        ).value;
+
+    if (modalAction) {
+        modalAction(value);
+    }
+
+    closeModal();
+}
 function renderMenu() {
 
     const list =
@@ -78,49 +119,76 @@ function openPiggy(id) {
 
 function addMoney() {
 
-    if (currentPiggy.current >= currentPiggy.goal) {
-        alert("🎉 Копилка уже заполнена!");
+    if (
+        currentPiggy.current >=
+        currentPiggy.goal
+    ) {
+
+        alert("Копилка заполнена!");
+
         return;
     }
 
-    const money = Number(
-        prompt("Сколько добавить?")
+    openModal(
+        "Добавить деньги",
+        "Введите сумму",
+        value => {
+
+            const money =
+                Number(value);
+
+            if (
+                !money ||
+                money <= 0
+            ) return;
+
+            currentPiggy.current += money;
+
+            if (
+                currentPiggy.current >
+                currentPiggy.goal
+            ) {
+
+                currentPiggy.current =
+                    currentPiggy.goal;
+            }
+
+            save();
+
+            renderPiggy();
+        }
     );
-
-    if (!money || money <= 0) {
-        return;
-    }
-
-    currentPiggy.current += money;
-
-    // Не даём превысить цель
-    if (currentPiggy.current > currentPiggy.goal) {
-        currentPiggy.current = currentPiggy.goal;
-    }
-
-    save();
-    renderPiggy();
 }
 
 function removeMoney() {
 
-    const money = Number(
-        prompt("Сколько вычесть?")
+    openModal(
+        "Вычесть деньги",
+        "Введите сумму",
+        value => {
+
+            const money =
+                Number(value);
+
+            if (
+                !money ||
+                money <= 0
+            ) return;
+
+            currentPiggy.current -= money;
+
+            if (
+                currentPiggy.current < 0
+            ) {
+
+                currentPiggy.current = 0;
+            }
+
+            save();
+
+            renderPiggy();
+        }
     );
-
-    if (!money || money <= 0) {
-        return;
-    }
-
-    currentPiggy.current -= money;
-
-    // Не даём уйти в минус
-    if (currentPiggy.current < 0) {
-        currentPiggy.current = 0;
-    }
-
-    save();
-    renderPiggy();
 }
 
 function deletePiggy(id) {
