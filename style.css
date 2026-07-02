@@ -286,3 +286,72 @@ button:disabled {
     border-color: #667eea;
     outline: none;
 }
+
+/* Адаптация под телефоны */
+@media (max-width: 768px) {
+
+    .container {
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        padding: 20px;
+    }
+
+    .main {
+        padding: 20px;
+    }
+
+    #piggyInfo {
+        width: 100%;
+        padding: 25px;
+        border-radius: 20px;
+    }
+
+    #piggyInfo h1 {
+        font-size: 30px;
+    }
+
+    #piggyInfo h3 {
+        font-size: 20px;
+    }
+
+    .money-buttons {
+        flex-direction: column;
+    }
+
+    .money-buttons button {
+        width: 100%;
+    }
+
+    .piggy-item {
+        flex-direction: row;
+    }
+
+    .piggy-button {
+        font-size: 16px;
+        padding: 14px;
+    }
+
+    .delete-button {
+        width: 55px;
+    }
+
+    .modal-content {
+        width: 90%;
+        max-width: 350px;
+        padding: 20px;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+    }
+
+    .modal-buttons button {
+        width: 100%;
+    }
+}
