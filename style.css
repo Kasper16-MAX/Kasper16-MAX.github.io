@@ -447,3 +447,69 @@ button:disabled {
         display: none;
     }
 }
+
+/* ===== ТОЛЬКО ДЛЯ ТЕЛЕФОНА ===== */
+
+.mobile-sheet {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .mobile-sheet {
+
+        display: block;
+
+        position: fixed;
+
+        left: 0;
+        right: 0;
+        bottom: -100%;
+
+        background: rgba(30,30,30,0.97);
+
+        backdrop-filter: blur(20px);
+
+        border-radius: 25px 25px 0 0;
+
+        padding: 20px;
+
+        transition: 0.3s;
+
+        z-index: 5000;
+
+        max-height: 70vh;
+
+        overflow-y: auto;
+    }
+
+    .mobile-sheet.show {
+
+        bottom: 70px;
+    }
+
+    .sheet-header {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 20px;
+    }
+
+    .sheet-header button {
+
+        width: 40px;
+        height: 40px;
+
+        border: none;
+
+        border-radius: 50%;
+
+        background: red;
+
+        color: white;
+    }
+}
