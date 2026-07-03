@@ -301,4 +301,95 @@ function showCreateForm() {
         .getElementById("name")
         .focus();
 }
+
+function openPiggiesSheet() {
+
+    renderMobilePiggies();
+
+    document
+        .getElementById("mobilePiggies")
+        .classList.add("show");
+}
+
+function closePiggiesSheet() {
+
+    document
+        .getElementById("mobilePiggies")
+        .classList.remove("show");
+}
+
+function renderMobilePiggies() {
+
+    const list =
+        document.getElementById("mobilePiggyList");
+
+    list.innerHTML = "";
+
+    piggies.forEach(piggy => {
+
+        list.innerHTML += `
+
+            <button
+                class="piggy-button"
+                onclick="
+                    openPiggy(${piggy.id});
+                    closePiggiesSheet();
+                ">
+
+                ${piggy.name}
+
+            </button>
+
+        `;
+    });
+}
+
+function openCreateSheet() {
+
+    document
+        .getElementById("mobileCreate")
+        .classList.add("show");
+}
+
+function closeCreateSheet() {
+
+    document
+        .getElementById("mobileCreate")
+        .classList.remove("show");
+}
+
+function createPiggyMobile() {
+
+    const name =
+        document.getElementById("mobileName").value;
+
+    const goal =
+        Number(
+            document.getElementById("mobileGoal").value
+        );
+
+    if (!name || goal <= 0) return;
+
+    piggies.push({
+        id: Date.now(),
+        name,
+        goal,
+        current: 0
+    });
+
+    save();
+
+    renderMenu();
+
+    closeCreateSheet();
+
+    document.getElementById(
+        "mobileName"
+    ).value = "";
+
+    document.getElementById(
+        "mobileGoal"
+    ).value = "";
+}
+
 renderMenu();
