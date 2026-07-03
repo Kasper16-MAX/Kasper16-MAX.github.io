@@ -76,15 +76,58 @@
 <!-- Нижняя панель -->
 <div class="bottom-nav">
 
-    <button onclick="togglePiggyMenu()">
+    <button onclick="openPiggiesSheet()">
         🏦 Мои копилки
     </button>
 
-    <button onclick="showCreateForm()">
+    <button onclick="openCreateSheet()">
         ➕ Создать
     </button>
 
 </div>
+
+<!-- МОБИЛЬНОЕ МЕНЮ КОПИЛОК -->
+<div class="mobile-sheet" id="mobilePiggies">
+
+    <div class="sheet-header">
+        <h2>Мои копилки</h2>
+
+        <button onclick="closePiggiesSheet()">
+            ✖
+        </button>
+    </div>
+
+    <div id="mobilePiggyList"></div>
+
+</div>
+
+<!-- МОБИЛЬНОЕ МЕНЮ СОЗДАНИЯ -->
+<div class="mobile-sheet" id="mobileCreate">
+
+    <div class="sheet-header">
+        <h2>Создать копилку</h2>
+
+        <button onclick="closeCreateSheet()">
+            ✖
+        </button>
+    </div>
+
+    <input
+        id="mobileName"
+        type="text"
+        placeholder="Название">
+
+    <input
+        id="mobileGoal"
+        type="number"
+        placeholder="Цель">
+
+    <button onclick="createPiggyMobile()">
+        Создать
+    </button>
+
+</div>
+
 <script src="script.js"></script>
 
 </body>
