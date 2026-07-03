@@ -281,4 +281,24 @@ function renderPiggy() {
     `;
 }
 
+function togglePiggyMenu() {
+
+    const sidebar =
+        document.querySelector(".sidebar");
+
+    sidebar.classList.toggle("mobile-show");
+}
+
+function showCreateForm() {
+
+    document
+        .getElementById("name")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+    document
+        .getElementById("name")
+        .focus();
+}
 renderMenu();
